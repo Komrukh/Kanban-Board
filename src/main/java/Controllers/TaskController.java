@@ -1,5 +1,7 @@
-package Config.Controllers;
+package Controllers;
 
+import Models.Task;
+import Servises.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,4 +30,3 @@ public class TaskController {
         return ResponseEntity.noContent().build();
     }
 }
-
