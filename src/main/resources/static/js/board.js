@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const registerForm = document.getElementById('register-user-form');
-    const loginForm = document.getElementById('login-user-form');
     const createTaskForm = document.getElementById('create-task-form');
     const updateTaskForm = document.getElementById('update-task-form');
 
@@ -17,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let tasks = [];
 
     const fetchTasks = () => {
-        fetch('/api/projects/1/tasks') // Пример конечной точки API
+        fetch('/api/projects/1/tasks')
             .then(response => response.json())
             .then(fetchedTasks => {
                 tasks = fetchedTasks;
@@ -25,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     };
 
-    // Function to display tasks on the board
     const displayTasks = (tasks) => {
         todoTasks.innerHTML = '';
         inProgressTasks.innerHTML = '';
@@ -47,7 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Function to create a task element
     const createTaskElement = (task) => {
         const taskDiv = document.createElement('div');
         taskDiv.className = 'task';
@@ -68,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return taskDiv;
     };
 
-    // Event listeners for drag-and-drop functionality
     const columns = document.querySelectorAll('.column .task-list');
     columns.forEach(column => {
         column.addEventListener('dragover', (event) => {
@@ -80,13 +75,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const taskElement = document.querySelector(`.task[data-id="${taskId}"]`);
             event.target.appendChild(taskElement);
 
-            // Обновление статуса задачи на сервере
             const newStatus = event.target.closest('.column').id.replace('-tasks', '');
             updateTaskStatus(taskId, newStatus);
         });
     });
 
-    // Function to update task status on the server
     const updateTaskStatus = (taskId, newStatus) => {
         fetch(`/api/tasks/${taskId}`, {
             method: 'PUT',
@@ -97,13 +90,11 @@ document.addEventListener('DOMContentLoaded', () => {
         })
             .then(response => response.json())
             .then(task => {
-                // Найдем и обновим задачу на доске
                 const taskElement = document.querySelector(`.task[data-id="${task.id}"]`);
                 taskElement.dataset.status = task.status;
             });
     };
 
-    // Event listener for creating new task
     createTaskForm.addEventListener('submit', (event) => {
         event.preventDefault();
         const title = document.getElementById('task-title').value;
@@ -131,7 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     });
 
-    // Event listener for updating an existing task
     updateTaskForm.addEventListener('submit', (event) => {
         event.preventDefault();
         const id = document.getElementById('edit-task-id').value;
@@ -164,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     });
 
-    // Event listener for sorting tasks
+
     sortTasksSelect.addEventListener('change', (event) => {
         const sortBy = event.target.value;
         tasks.sort((a, b) => {
@@ -175,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
         displayTasks(tasks);
     });
 
-    // Event listener for filtering tasks
+
     filterStatusSelect.addEventListener('change', (event) => {
         const filterBy = event.target.value;
         if (filterBy === 'all') {
@@ -186,57 +176,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Event listener for user registration
-    registerForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const username = document.getElementById('register-username').value;
-        const password = document.getElementById('register-password').value;
-        const email = document.getElementById('register-email').value;
-
-        const newUser = {
-            username: username,
-            passwordHash: password,
-            email: email
-        };
-
-        fetch('/api/auth/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(newUser)
-        })
-            .then(response => response.json())
-            .then(data => {
-                alert(data); // Уведомление об успешной регистрации или ошибке
-                registerForm.reset();
-            });
-    });
-
-    // Event listener for user login
-    loginForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const username = document.getElementById('login-username').value;
-        const password = document.getElementById('login-password').value;
-
-        const credentials = btoa(`${username}:${password}`);
-        fetch('/login', {
-            method: 'POST',
-            headers: {
-                'Authorization': `Basic ${credentials}`
-            }
-        })
-            .then(response => {
-                if (response.ok) {
-                    alert('Login successful!');
-                    newTaskFormContainer.style.display = 'block';
-                    loginForm.reset();
-                } else {
-                    alert('Login failed! Please check your username and password.');
-                }
-            });
-    });
-
-    // Initial fetch of tasks
     fetchTasks();
 });

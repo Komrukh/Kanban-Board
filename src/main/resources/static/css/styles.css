@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', Arial, sans-serif;
     background-color: #f4f5f7;
     margin: 0;
     padding: 0;
@@ -8,12 +8,78 @@ body {
 header {
     background-color: #007bff;
     color: white;
-    padding: 1rem;
+    padding: 20px;
     text-align: center;
 }
 
-.main {
-    padding: 2rem;
+main {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+form {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    margin: 20px;
+    text-align: center;
+}
+
+form h3 {
+    margin-top: 0;
+}
+
+form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+form input,
+form textarea,
+form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.controls label {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.controls select {
+    padding: 10px;
+    margin-right: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 .board {
@@ -43,59 +109,10 @@ header {
     background-color: #ffffff;
     border-radius: 4px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-/* Добавляем стили для форм */
-#new-task-form, #edit-task-form {
-    background-color: #ffffff;
-    border-radius: 4px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin: 20px;
-}
-
-#new-task-form h3, #edit-task-form h3 {
-    margin-top: 0;
-}
-
-#new-task-form form, #edit-task-form form {
-    display: flex;
-    flex-direction: column;
-}
-
-#new-task-form label, #edit-task-form label {
-    margin: 10px 0 5px;
-}
-
-#new-task-form input, #edit-task-form input,
-#new-task-form textarea, #edit-task-form textarea,
-#new-task-form select, #edit-task-form select {
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-}
-
-#new-task-form button, #edit-task-form button {
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.controls {
-    margin: 20px;
-    text-align: center;
-}
-
-.controls label {
-    margin-right: 10px;
-}
-
-.controls select {
-    padding: 10px;
-    margin-right: 20px;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
+.task:hover {
+    background-color: #f1f1f1;
 }

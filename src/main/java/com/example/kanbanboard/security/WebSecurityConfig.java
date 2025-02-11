@@ -33,7 +33,8 @@ public class WebSecurityConfig {
                         .requestMatchers("/api/auth/**").permitAll()
                         .anyRequest().permitAll()  // Временно разрешаем доступ ко всем страницам
                 )
-                .httpBasic(withDefaults());
+                .httpBasic(withDefaults())
+                .formLogin(withDefaults());
         return http.build();
     }
 
