@@ -16,6 +16,8 @@ main {
     padding: 20px;
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 form {
@@ -30,8 +32,6 @@ form {
 
 form h3 {
     margin-top: 0;
-    color: #007bff;
-    margin-right: 75%;
 }
 
 form label {
@@ -119,3 +119,58 @@ form button:hover {
     background-color: #f1f1f1;
 }
 
+
+#new-task-form, #edit-task-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px;
+    width: 80%;
+    max-width: 400px;
+}
+
+#new-task-form h3, #edit-task-form h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+#new-task-form form, #edit-task-form form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#new-task-form label, #edit-task-form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#new-task-form input, #edit-task-form input,
+#new-task-form textarea, #edit-task-form textarea,
+#new-task-form select, #edit-task-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#new-task-form button, #edit-task-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#new-task-form button:hover, #edit-task-form button:hover {
+    background-color: #0056b3;
+}

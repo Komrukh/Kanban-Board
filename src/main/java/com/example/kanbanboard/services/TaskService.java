@@ -21,7 +21,19 @@ public class TaskService {
 
     public List<Task> getTasksByProject(Long projectId) {
         Project project = projectRepository.findById(projectId).orElse(null);
+        if (project == null) {
+            return null;
+        }
         return taskRepository.findByProject(project);
+    }
+
+    public Task createTask(Long projectId, Task task) {
+        Project project = projectRepository.findById(projectId).orElse(null);
+        if (project == null) {
+            return null;
+        }
+        task.setProject(project);
+        return taskRepository.save(task);
     }
 
 }

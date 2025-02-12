@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let tasks = [];
 
-    const fetchTasks = () => {
-        fetch('/api/projects/1/tasks')
+    const fetchTasks = (projectId) => {
+        fetch(`/api/projects/${projectId}/tasks`) // Конечная точка API с учетом projectId
             .then(response => response.json())
             .then(fetchedTasks => {
                 tasks = fetchedTasks;
@@ -49,17 +49,17 @@ document.addEventListener('DOMContentLoaded', () => {
         taskDiv.className = 'task';
         taskDiv.textContent = task.title;
         taskDiv.draggable = true;
-        taskDiv.dataset.id = task.id; // Добавим ID для задачи
+        taskDiv.dataset.id = task.id;
         taskDiv.addEventListener('dragstart', (event) => {
             event.dataTransfer.setData('text/plain', task.id);
         });
         taskDiv.addEventListener('dblclick', () => {
-            editTaskFormContainer.style.display = 'block';
-            newTaskFormContainer.style.display = 'none';
             document.getElementById('edit-task-id').value = task.id;
             document.getElementById('edit-task-title').value = task.title;
             document.getElementById('edit-task-description').value = task.description;
             document.getElementById('edit-task-status').value = task.status;
+            document.getElementById('new-task-form').style.display = 'none';
+            document.getElementById('edit-task-form').style.display = 'block';
         });
         return taskDiv;
     };
@@ -97,6 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     createTaskForm.addEventListener('submit', (event) => {
         event.preventDefault();
+        const projectId = 1;
         const title = document.getElementById('task-title').value;
         const description = document.getElementById('task-description').value;
         const status = document.getElementById('task-status').value;
@@ -176,5 +177,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    fetchTasks();
+    fetchTasks(1);
 });

@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(response => {
                 if (response.ok) {
                     alert('Login successful!');
-                    window.location.href = '/board.html'; // Переход к Kanban-доске после успешного входа
+                    window.location.href = '/board.html';
                     loginForm.reset();
                 } else {
                     alert('Login failed! Please check your username and password.');

@@ -20,10 +20,20 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             body: JSON.stringify(newUser)
         })
-            .then(response => response.json())
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Registration failed');
+                }
+            })
             .then(data => {
-                alert(data);
+                alert('You are registered!');
+                window.location.href = '../login.html';
                 registerForm.reset();
+            })
+            .catch(error => {
+                alert('Registration failed: ' + error.message);
             });
     });
 });
