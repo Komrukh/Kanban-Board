@@ -31,9 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('You are registered!');
                 window.location.href = '../login.html';
                 registerForm.reset();
-            })
-            .catch(error => {
-                alert('Registration failed: ' + error.message);
             });
     });
 });
